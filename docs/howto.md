@@ -3,6 +3,8 @@ Desarrollo de un blog con CouchDB
 
 Con la aparición de bases de datos NoSql, la decisión de qué tipo de base de datos usar se está poniendo compleja. Entonces, decidimos aportar con ejemplos. Estaremos desarrollando mini aplicaciones usando las distintas tecnologías de bases de datos, tratando de darle un uso apropiado a las mismas y dando una conclusión final.
 
+BroTip: El proyecto completo se puede [descargar en GitHub](https://github.com/lomefin/CouchDB-JS-HowTos)
+
 Acerca de CouchDB
 -----------------
 
@@ -35,6 +37,9 @@ Mi base de datos
 
 Cuando termines este proceso, anda a http://localhost:5984/_utils/ y tu base de datos ya estará ahí esperandote!
 
+Primer dato en la base
+----------------------
+
 Para este ejemplo, haré una base de datos que almacene los howto's que genero, tal como este, asi que mi ejemplo más simple de Hello World será el siguiente:
 
 1.	Anda a tu base de datos por la dirección anterior y crea una base de datos llamada howtos.
@@ -65,4 +70,28 @@ Para este ejemplo, haré una base de datos que almacene los howto's que genero, 
 		*	Finalmente, viene un string en JSON diciendonos que el documento fue creado con el id hola_mundo y su <em>número de revisión</em>..
 6.	Revisen su base de datos, el documento debería estar [listado](http://localhost:5984/_utils/database.html?howtos).
 
- 
+Ya con eso tenemos lo básico para partir, ya puedes suponer maneras en que podemos hacer funcionar este sistema.
+Ahora veremos algún ejemplo más poderoso de cómo trabajar con CouchDB.
+
+Aplicación de HowTo's en Markdown
+--------------------------------
+
+Vamos a hacer una aplicación muy simple en Javascript, solo será un set de páginas en donde cada una de ellas podrá realizar una actividad, estas deberían ser:
+
+-	Crear un Howto (con título, autor y contenido)
+-	Editar el HowTo
+-	Ver una lista de HowTo's
+-	Ver los detalles de un HowTo (su historial)
+-	Ver un HowTo en particular (una revisión en particular)
+
+Para editar el Markdown usaremos [MarkitUp!](http://markitup.jaysalvat.com/home/) que es el editor que usamos en Ataxic.
+
+Por primera vez en la historia, usaré solamente JQuery, aunque ustedes deben saber que no considero que JQuery sea suficiente para hacer aplicaciones decentes.
+
+El servidor
+------------
+Una cosa que me había olvidado de contarles, es que CouchDB al ser 100% HTTP, tiene la capacidad de saltarse el paradigma de las tres capas (Browser, Servidor de Aplicaciones y Datos) para transformarse en uno de dos capas: El Browser y el resto. La gran ventaja de esto es la capacidad de escalar horizontalmente, asi que si tu aplicación funciona bajo el paradigma de CouchDB, quizás te convenga hacerlo asi, sino deberías revisar un tutorial de Couch con otro lenguaje.
+
+Entonces, mis páginas donde van a estar? Fácil: Las páginas serán servidas directamente desde el servidor CouchDB, y para eso usaremos CouchApp.
+
+

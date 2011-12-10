@@ -2,11 +2,31 @@
 <html>
 <head>
 	<title>Markdown CouchDB Tester</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js"></script>
-	<script src="http://mootools.net/more/f48c5f3088ed380c865abc1c33e8cfc0"></script>
-	<script src="http://localhost:5984/_utils/script/couch.js"></script>
+	<script src="/_utils/script/jquery.js"></script>
+  <script src="/_utils/script/jquery.couch.js"></script>
 </head>
 <body>
+<h1>Documentos de esta base de datos!</h1>
+<ul id="result">
 	
+</div>
+
+<script>
+		
+
+	$.couch.allDocs(
+	{
+		success: function(docs)
+		{
+			docs.forEach(
+				function(doc) {
+          			$("#result").append('<li><a href="/_utils/document.html?howtos/'+db+'">'+doc+'</a></li>');
+        	});
+		}
+	})
+	
+	
+
+</script>
 </body>
 </html>
