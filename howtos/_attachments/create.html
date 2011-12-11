@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+	<title>Markdown CouchDB Tester</title>
+	<script src="/_utils/script/jquery.js"></script>
+  	<script src="/_utils/script/jquery.couch.js"></script>
+  	<link rel="stylesheet" href="style/main.css" type="text/css">
+</head>
+<body>
+<h1>Crear un documento</h1>
+<div id="result"></div>
+<div>
+	<label for="doc_title">Titulo</label>
+	<input name="doc_title" id="doc_title" type="text" />
+</div>
+<div>
+	<label for="doc_content">Contenido</label>
+	<textarea name="doc_content" id="doc_content"></textarea>
+</div>
+<div>
+	<button value="Crear" id="doc_create">Crear Documento</button>
+</div>
+<
+<script>
+	
+	$('#doc_create').click(function(){
+	
+		db = $.couch.db('howtos');
+		doc = {
+				title:$('#doc_title').val(),
+				content:$('#doc_content').val()
+				};
+		
+		db.saveDoc(doc,{success:function(resp){
+			console.log(resp);
+			if(resp.ok)
+			{
+				$('#result').html('<p>Documento guardado!</p><p>Id: '+resp.id+'</p><p>Rev:'+resp.rev+'</p>');
+			}
+		}});
+	})
+
+</script>
+</body>
+</html> 

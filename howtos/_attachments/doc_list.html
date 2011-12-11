@@ -4,24 +4,28 @@
 	<title>Markdown CouchDB Tester</title>
 	<script src="/_utils/script/jquery.js"></script>
   <script src="/_utils/script/jquery.couch.js"></script>
+  <link rel="stylesheet" href="style/main.css" type="text/css">
 </head>
 <body>
-<h1>Lista de documentos en esta Base de Datos!</h1>
+<h1>Lista de documentos en esta base de datos</h1>
 <ul id="result">
 	
-</div>
+</ul>
 
 <script>
 		
 
-	$.couch.allDocs(
+	db = $.couch.db('howtos');
+	db.allDocs(
 	{
 		success: function(docs)
 		{
-			docs.forEach(
-				function(doc) {
-          			$("#result").append('<li><a href="/_utils/document.html?howtos/'+db+'">'+doc+'</a></li>');
-        	});
+			$.each(docs.rows,
+				function(idx,obj)
+				{
+					$("#result").append('<li><a href="/_utils/document.html?howtos/'+obj.id+'">'+obj.id+'</a></li>');
+				}
+			)
 		}
 	})
 	
